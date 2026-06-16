@@ -41,9 +41,15 @@ jobs:
         pip install ruff==0.8.0
         pip install -r ./backend/requirements.txt
     # Этот шаг дополним:
-    - name: Lint with ruff and run django tests
-      # Команд стало больше одной; ставим символ | и пишем команды построчно
+    - name: Lint and run tests
+      env:
+        DB_NAME: django_db
+        DB_USER: django_user
+        DB_PASSWORD: django_password
+        DB_HOST: localhost
+        DB_PORT: 5432
       run: |
         python -m ruff check backend/
         cd backend/
+        python manage.py migrate --no-input
         python manage.py test
