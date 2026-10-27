@@ -36,7 +36,7 @@ function App() {
   return (
     <div className={styles.app}>
       <UserContext.Provider value={[userState, setUserState]}>
-        <BrowserRouter>
+        <BrowserRouter basename="/kittygram">
           <Header setQueryPage={setQueryPage} />
           <main className={styles.content}>
             <Switch>

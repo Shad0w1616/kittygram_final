@@ -1,7 +1,10 @@
 from http import HTTPStatus
 from pathlib import Path
 
+import pytest
 import requests
+
+pytestmark = pytest.mark.dockerhub
 
 
 def _get_dockerhub_username(
@@ -36,7 +39,7 @@ def test_dockerhub_images_exist(
             username=docker_hub_username,
             image=image
         )
-        response = requests.get(link)
+        response = requests.get(link, timeout=20)
         assert response.status_code == expected_status_code, (
             'Убедитесь, что в вашем DockerHub-аккаунте доступен образ '
             f'`{image}`. Образ должен быть публичным.'
