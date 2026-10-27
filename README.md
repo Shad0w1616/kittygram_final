@@ -30,7 +30,7 @@ Backend ждёт готовности PostgreSQL, применяет мигра�
 ## GitHub Actions и Docker Hub
 
 Workflow `.github/workflows/main.yml` проверяет backend через Ruff и Django
-tests, инфраструктурные файлы через pytest, frontend через Jest и сборку React.
+tests, инфраструктурные файлы через pytest, frontend через Jest и сборку dgdgReact.
 После успешного прохождения тестов и проверки контейнеров при push в `main` собираются образы:
 
 - `<DOCKER_USERNAME>/kittygram_backend`;

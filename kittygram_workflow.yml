@@ -86,7 +86,12 @@ jobs:
         run: |
           cp .env.example .env
           docker compose up -d --build
-          curl --fail --retry 20 --retry-connrefused --retry-delay 2 http://localhost:9000/kittygram/
+      - name: Wait for the gateway to accept HTTP requests
+        run: >-
+          curl --fail --silent --show-error
+          --retry 20 --retry-all-errors --retry-delay 2 --retry-max-time 90
+          --connect-timeout 3 --max-time 5 --output /dev/null
+          http://localhost:9000/kittygram/
       - run: python -m pytest -m integration
       - name: Container logs on failure
         if: failure()
